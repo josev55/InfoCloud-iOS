@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CMenuViewController : UIViewController
+@interface CMenuViewController : UIViewController{
+	NSArray *menuItems;
+}
+@property (weak, nonatomic) IBOutlet UITableView *mMenuTableview;
 
 @end

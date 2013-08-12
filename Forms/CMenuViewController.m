@@ -7,6 +7,7 @@
 //
 
 #import "CMenuViewController.h"
+#import "CAppDelegate.h"
 
 @interface CMenuViewController ()
 
@@ -26,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	menuItems = [[NSArray alloc] init];
 	// Do any additional setup after loading the view.
 }
 

@@ -18,6 +18,7 @@
 		E826862317B97C53004281C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E826862217B97C53004281C0 /* Default-568h@2x.png */; };
 		E826862A17B97E5E004281C0 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E826862917B97E5E004281C0 /* Storyboard.storyboard */; };
 		E826862F17B97F63004281C0 /* CMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E826862E17B97F63004281C0 /* CMenuViewController.m */; };
+		E826863317B98BC0004281C0 /* CMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E826863217B98BC0004281C0 /* CMenuItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +37,9 @@
 		E826862217B97C53004281C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E826862917B97E5E004281C0 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		E826862D17B97F63004281C0 /* CMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMenuViewController.h; sourceTree = "<group>"; };
-		E826862E17B97F63004281C0 /* CMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMenuViewController.m; sourceTree = "<group>"; };
+		E826862E17B97F63004281C0 /* CMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMenuViewController.m; sourceTree = "<group>"; usesTabs = 1; };
+		E826863117B98BC0004281C0 /* CMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMenuItem.h; sourceTree = "<group>"; };
+		E826863217B98BC0004281C0 /* CMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMenuItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 				E826860A17B97C51004281C0 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		E826860A17B97C51004281C0 /* Products */ = {
 			isa = PBXGroup;
@@ -83,6 +87,7 @@
 		E826861217B97C52004281C0 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				E826863017B98BA7004281C0 /* DomainModels */,
 				E826862C17B97F3E004281C0 /* Menu */,
 				E826862B17B97F32004281C0 /* UIFiles */,
 				E826861B17B97C52004281C0 /* CAppDelegate.h */,
@@ -121,6 +126,15 @@
 				E826862E17B97F63004281C0 /* CMenuViewController.m */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		E826863017B98BA7004281C0 /* DomainModels */ = {
+			isa = PBXGroup;
+			children = (
+				E826863117B98BC0004281C0 /* CMenuItem.h */,
+				E826863217B98BC0004281C0 /* CMenuItem.m */,
+			);
+			name = DomainModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +207,7 @@
 				E826861917B97C52004281C0 /* main.m in Sources */,
 				E826861D17B97C52004281C0 /* CAppDelegate.m in Sources */,
 				E826862F17B97F63004281C0 /* CMenuViewController.m in Sources */,
+				E826863317B98BC0004281C0 /* CMenuItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

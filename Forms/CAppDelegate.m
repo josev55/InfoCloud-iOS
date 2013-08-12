@@ -9,13 +9,18 @@
 #import "CAppDelegate.h"
 
 @implementation CAppDelegate
+@synthesize documentPath;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	documentPath = ([paths count] > 0 ? [paths objectAtIndex:0] : nil);
+	NSString *formsMainDirectory = [NSString stringWithFormat:@"%@/forms",documentPath];
+	NSFileManager *fileManager = [[NSFileManager alloc] init];
+	if (![fileManager fileExistsAtPath:formsMainDirectory isDirectory:YES]) {
+		[fileManager createDirectoryAtPath:formsMainDirectory withIntermediateDirectories:NO attributes:nil error:nil];
+		NSLog(@"Directory Created!");
+	}
     return YES;
 }
 

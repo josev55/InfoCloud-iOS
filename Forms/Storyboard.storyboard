@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="71" y="19"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="KOl-7H-vw7">
             <objects>
-                <viewController id="6e8-rI-8f5" sceneMemberID="viewController">
+                <viewController id="6e8-rI-8f5" customClass="CMenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZmL-gq-Bd0">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -45,6 +45,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qjC-Yk-5le"/>
+                    <connections>
+                        <outlet property="mMenuTableview" destination="DkK-Hk-9sT" id="NRL-zu-HDQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmN-9J-JZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -52,6 +55,12 @@
         </scene>
     </scenes>
     <classes>
+        <class className="CMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMenuViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mMenuTableview" candidateClass="UITableView"/>
+            </relationships>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
