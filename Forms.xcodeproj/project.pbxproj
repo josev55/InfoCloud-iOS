@@ -16,6 +16,8 @@
 		E826861F17B97C52004281C0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E826861E17B97C52004281C0 /* Default.png */; };
 		E826862117B97C53004281C0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E826862017B97C53004281C0 /* Default@2x.png */; };
 		E826862317B97C53004281C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E826862217B97C53004281C0 /* Default-568h@2x.png */; };
+		E826862A17B97E5E004281C0 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E826862917B97E5E004281C0 /* Storyboard.storyboard */; };
+		E826862F17B97F63004281C0 /* CMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E826862E17B97F63004281C0 /* CMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,9 @@
 		E826861E17B97C52004281C0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		E826862017B97C53004281C0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		E826862217B97C53004281C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E826862917B97E5E004281C0 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		E826862D17B97F63004281C0 /* CMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMenuViewController.h; sourceTree = "<group>"; };
+		E826862E17B97F63004281C0 /* CMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +83,8 @@
 		E826861217B97C52004281C0 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				E826862C17B97F3E004281C0 /* Menu */,
+				E826862B17B97F32004281C0 /* UIFiles */,
 				E826861B17B97C52004281C0 /* CAppDelegate.h */,
 				E826861C17B97C52004281C0 /* CAppDelegate.m */,
 				E826861317B97C52004281C0 /* Supporting Files */,
@@ -97,6 +104,23 @@
 				E826862217B97C53004281C0 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E826862B17B97F32004281C0 /* UIFiles */ = {
+			isa = PBXGroup;
+			children = (
+				E826862917B97E5E004281C0 /* Storyboard.storyboard */,
+			);
+			name = UIFiles;
+			sourceTree = "<group>";
+		};
+		E826862C17B97F3E004281C0 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				E826862D17B97F63004281C0 /* CMenuViewController.h */,
+				E826862E17B97F63004281C0 /* CMenuViewController.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +179,7 @@
 				E826861F17B97C52004281C0 /* Default.png in Resources */,
 				E826862117B97C53004281C0 /* Default@2x.png in Resources */,
 				E826862317B97C53004281C0 /* Default-568h@2x.png in Resources */,
+				E826862A17B97E5E004281C0 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +192,7 @@
 			files = (
 				E826861917B97C52004281C0 /* main.m in Sources */,
 				E826861D17B97C52004281C0 /* CAppDelegate.m in Sources */,
+				E826862F17B97F63004281C0 /* CMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
