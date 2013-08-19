@@ -7,6 +7,7 @@
 //
 
 #import "CAppDelegate.h"
+#import "CConnectionHelper.h"
 
 @implementation CAppDelegate
 @synthesize documentPath;
@@ -17,10 +18,21 @@
 	documentPath = ([paths count] > 0 ? [paths objectAtIndex:0] : nil);
 	NSString *formsMainDirectory = [NSString stringWithFormat:@"%@/forms",documentPath];
 	NSFileManager *fileManager = [[NSFileManager alloc] init];
-	if (![fileManager fileExistsAtPath:formsMainDirectory isDirectory:YES]) {
+	if (![fileManager fileExistsAtPath:formsMainDirectory]) {
 		[fileManager createDirectoryAtPath:formsMainDirectory withIntermediateDirectories:NO attributes:nil error:nil];
 		NSLog(@"Directory Created!");
 	}
+	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[CConnectionHelper getFormsURL]]];
+	NSURLResponse *response = nil;
+	NSError *error;
+	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	NSString *xmlForms = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	NSLog(@"%@",xmlForms);
+	NSString *filename = [NSString stringWithFormat:@"%@/myforms.xml",formsMainDirectory];
+	if ([fileManager fileExistsAtPath:filename]){
+		[fileManager removeItemAtPath:filename error:nil];
+	}
+	[fileManager createFileAtPath:filename contents:data attributes:nil];
     return YES;
 }
 

@@ -1,5 +1,5 @@
 //
-//  CMenuItem.h
+//  CConnectionHelper.h
 //  Forms
 //
 //  Created by Jose Vildosola on 12-08-13.
@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CMenuItem : NSObject{
+@interface CConnectionHelper : NSObject
 
-}
-
-@property (weak,nonatomic) UIImage *itemImage;
-@property (weak, nonatomic) NSString *label;
++ (NSString *) getFormsURL;
++ (NSString *) getRepoURL;
 
 @end

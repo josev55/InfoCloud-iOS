@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="oG4-2Z-2HR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="oG4-2Z-2HR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -8,8 +8,10 @@
         <scene sceneID="209-u3-9tg">
             <objects>
                 <navigationController definesPresentationContext="YES" id="oG4-2Z-2HR" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="etv-0D-OmV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="etv-0D-OmV">
+                        <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="UDY-IA-GGb">
@@ -22,9 +24,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opa-tW-oJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="19"/>
+            <point key="canvasLocation" x="-2833" y="-381"/>
         </scene>
-        <!--Menu View Controller-->
+        <!--Menu View Controller - Menu-->
         <scene sceneID="KOl-7H-vw7">
             <objects>
                 <viewController id="6e8-rI-8f5" customClass="CMenuViewController" sceneMemberID="viewController">
@@ -32,26 +34,77 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DkK-Hk-9sT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DkK-Hk-9sT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="DkK-Hk-9sT" firstAttribute="trailing" secondItem="ZmL-gq-Bd0" secondAttribute="trailing" type="default" id="E68-hR-DdU"/>
-                            <constraint firstItem="DkK-Hk-9sT" firstAttribute="bottom" secondItem="ZmL-gq-Bd0" secondAttribute="bottom" type="default" id="SvR-0T-olE"/>
-                            <constraint firstItem="DkK-Hk-9sT" firstAttribute="top" secondItem="ZmL-gq-Bd0" secondAttribute="top" type="default" id="ZyS-qW-Bxg"/>
-                            <constraint firstItem="DkK-Hk-9sT" firstAttribute="leading" secondItem="ZmL-gq-Bd0" secondAttribute="leading" type="default" id="qSg-56-d4z"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="qjC-Yk-5le"/>
+                    <navigationItem key="navigationItem" title="Menu" id="qjC-Yk-5le"/>
                     <connections>
                         <outlet property="mMenuTableview" destination="DkK-Hk-9sT" id="NRL-zu-HDQ"/>
+                        <segue destination="PkE-WS-XxB" kind="push" identifier="nuevo" id="cEp-vk-QDL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmN-9J-JZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="673" y="19"/>
+            <point key="canvasLocation" x="-2231" y="-381"/>
+        </scene>
+        <!--Nuevo View Controller-->
+        <scene sceneID="0RG-Yv-PoE">
+            <objects>
+                <viewController id="PkE-WS-XxB" customClass="CNuevoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Sh-Pg-xtA">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mej-jT-fMW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wMq-Ya-9Oh"/>
+                    <connections>
+                        <outlet property="mNuevoTableView" destination="mej-jT-fMW" id="TPW-Hl-iHn"/>
+                        <segue destination="I8n-6s-Wyz" kind="push" identifier="webview" id="sFq-sy-BSW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pne-rB-GF4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1562" y="-381"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="snc-WE-GEW">
+            <objects>
+                <viewController id="I8n-6s-Wyz" customClass="CWebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zgK-jy-TEc">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="kGb-YK-NGu">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yGc-BA-wN1">
+                        <barButtonItem key="backBarButtonItem" title="Nuevo" id="lzt-Q3-MLC"/>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="kGb-YK-NGu" id="ZEK-gF-kzQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vxL-i5-V2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-916" y="-381"/>
         </scene>
     </scenes>
     <classes>
@@ -61,8 +114,17 @@
                 <relationship kind="outlet" name="mMenuTableview" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        <class className="CNuevoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CNuevoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mNuevoTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CWebViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CWebViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CMenuViewController : UIViewController{
-	NSArray *menuItems;
+@interface CMenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+	NSMutableArray *menuItems;
 }
 @property (weak, nonatomic) IBOutlet UITableView *mMenuTableview;
 
