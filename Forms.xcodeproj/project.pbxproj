@@ -50,6 +50,15 @@
 		E841698F17C24D7000AAFCE3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E841698E17C24D7000AAFCE3 /* libz.dylib */; };
 		E841699317C24E1800AAFCE3 /* CHttpDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = E841699217C24E1800AAFCE3 /* CHttpDownload.m */; };
 		E841699617C26DB500AAFCE3 /* CWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E841699517C26DB500AAFCE3 /* CWebViewController.m */; };
+		E8E0478A17C3A77B00DC4356 /* CDraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0478917C3A77B00DC4356 /* CDraftViewController.m */; };
+		E8E0478D17C3B7FD00DC4356 /* CInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0478C17C3B7FD00DC4356 /* CInfoParser.m */; };
+		E8E0479017C3BEAA00DC4356 /* CInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0478F17C3BEAA00DC4356 /* CInfoModel.m */; };
+		E8E0479217C3D1DC00DC4356 /* drafts.xml in Resources */ = {isa = PBXBuildFile; fileRef = E8E0479117C3D1DC00DC4356 /* drafts.xml */; };
+		E8E0479517C3D96C00DC4356 /* CDraftsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0479417C3D96C00DC4356 /* CDraftsParser.m */; };
+		E8E0479817C3D9B700DC4356 /* CDraftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0479717C3D9B700DC4356 /* CDraftModel.m */; };
+		E8E0479A17C3FB0800DC4356 /* UIDraftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8E0479917C3FB0800DC4356 /* UIDraftCell.xib */; };
+		E8E0479D17C3FBB200DC4356 /* CDraftItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0479C17C3FBB200DC4356 /* CDraftItemCell.m */; };
+		E8E047A017C410B900DC4356 /* CDraftItemParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0479F17C410B900DC4356 /* CDraftItemParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +126,22 @@
 		E841699217C24E1800AAFCE3 /* CHttpDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHttpDownload.m; sourceTree = "<group>"; };
 		E841699417C26DB500AAFCE3 /* CWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWebViewController.h; sourceTree = "<group>"; };
 		E841699517C26DB500AAFCE3 /* CWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CWebViewController.m; sourceTree = "<group>"; tabWidth = 4; };
+		E8E0478817C3A77B00DC4356 /* CDraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDraftViewController.h; sourceTree = "<group>"; };
+		E8E0478917C3A77B00DC4356 /* CDraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDraftViewController.m; sourceTree = "<group>"; };
+		E8E0478B17C3B7FD00DC4356 /* CInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CInfoParser.h; sourceTree = "<group>"; };
+		E8E0478C17C3B7FD00DC4356 /* CInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CInfoParser.m; sourceTree = "<group>"; };
+		E8E0478E17C3BEAA00DC4356 /* CInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CInfoModel.h; sourceTree = "<group>"; };
+		E8E0478F17C3BEAA00DC4356 /* CInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CInfoModel.m; sourceTree = "<group>"; };
+		E8E0479117C3D1DC00DC4356 /* drafts.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = drafts.xml; sourceTree = "<group>"; };
+		E8E0479317C3D96C00DC4356 /* CDraftsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDraftsParser.h; sourceTree = "<group>"; };
+		E8E0479417C3D96C00DC4356 /* CDraftsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDraftsParser.m; sourceTree = "<group>"; };
+		E8E0479617C3D9B700DC4356 /* CDraftModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDraftModel.h; sourceTree = "<group>"; };
+		E8E0479717C3D9B700DC4356 /* CDraftModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDraftModel.m; sourceTree = "<group>"; };
+		E8E0479917C3FB0800DC4356 /* UIDraftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIDraftCell.xib; sourceTree = "<group>"; };
+		E8E0479B17C3FBB200DC4356 /* CDraftItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDraftItemCell.h; sourceTree = "<group>"; };
+		E8E0479C17C3FBB200DC4356 /* CDraftItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDraftItemCell.m; sourceTree = "<group>"; };
+		E8E0479E17C410B900DC4356 /* CDraftItemParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDraftItemParser.h; sourceTree = "<group>"; };
+		E8E0479F17C410B900DC4356 /* CDraftItemParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDraftItemParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +191,7 @@
 		E826861217B97C52004281C0 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				E8E0478717C3A75000DC4356 /* Draft */,
 				E841699717C26DEE00AAFCE3 /* Web */,
 				E841699017C24DEE00AAFCE3 /* HttpModule */,
 				E826866017B9A8C5004281C0 /* Nuevo */,
@@ -184,6 +210,7 @@
 		E826861317B97C52004281C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E8E0479117C3D1DC00DC4356 /* drafts.xml */,
 				E826863517B98EC8004281C0 /* ImageResources */,
 				E826861417B97C52004281C0 /* Forms-Info.plist */,
 				E826861517B97C52004281C0 /* InfoPlist.strings */,
@@ -205,6 +232,7 @@
 				E826862917B97E5E004281C0 /* Storyboard.storyboard */,
 				E826865017B9926A004281C0 /* UIMenuCell.xib */,
 				E826866717BA6C34004281C0 /* UINuevoCell.xib */,
+				E8E0479917C3FB0800DC4356 /* UIDraftCell.xib */,
 				E826866D17BAB51E004281C0 /* UIDownloadDialog.xib */,
 			);
 			name = UIFiles;
@@ -226,6 +254,10 @@
 				E826863217B98BC0004281C0 /* CMenuItem.m */,
 				E826866117B9A95B004281C0 /* CFormModel.h */,
 				E826866217B9A95B004281C0 /* CFormModel.m */,
+				E8E0478E17C3BEAA00DC4356 /* CInfoModel.h */,
+				E8E0478F17C3BEAA00DC4356 /* CInfoModel.m */,
+				E8E0479617C3D9B700DC4356 /* CDraftModel.h */,
+				E8E0479717C3D9B700DC4356 /* CDraftModel.m */,
 			);
 			name = DomainModels;
 			sourceTree = "<group>";
@@ -267,6 +299,12 @@
 			children = (
 				E826865D17B9A5FF004281C0 /* CFormsParser.h */,
 				E826865E17B9A5FF004281C0 /* CFormsParser.m */,
+				E8E0478B17C3B7FD00DC4356 /* CInfoParser.h */,
+				E8E0478C17C3B7FD00DC4356 /* CInfoParser.m */,
+				E8E0479317C3D96C00DC4356 /* CDraftsParser.h */,
+				E8E0479417C3D96C00DC4356 /* CDraftsParser.m */,
+				E8E0479E17C410B900DC4356 /* CDraftItemParser.h */,
+				E8E0479F17C410B900DC4356 /* CDraftItemParser.m */,
 			);
 			name = XMLParsers;
 			sourceTree = "<group>";
@@ -287,6 +325,8 @@
 				E826865317B99324004281C0 /* CMenuItemCell.m */,
 				E826866A17BA6D9D004281C0 /* CNuevoItemCell.h */,
 				E826866B17BA6D9D004281C0 /* CNuevoItemCell.m */,
+				E8E0479B17C3FBB200DC4356 /* CDraftItemCell.h */,
+				E8E0479C17C3FBB200DC4356 /* CDraftItemCell.m */,
 			);
 			name = UIModels;
 			sourceTree = "<group>";
@@ -323,6 +363,15 @@
 				E841699517C26DB500AAFCE3 /* CWebViewController.m */,
 			);
 			name = Web;
+			sourceTree = "<group>";
+		};
+		E8E0478717C3A75000DC4356 /* Draft */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0478817C3A77B00DC4356 /* CDraftViewController.h */,
+				E8E0478917C3A77B00DC4356 /* CDraftViewController.m */,
+			);
+			name = Draft;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,6 +447,8 @@
 				E826865117B9926A004281C0 /* UIMenuCell.xib in Resources */,
 				E826866817BA6C34004281C0 /* UINuevoCell.xib in Resources */,
 				E826866E17BAB51F004281C0 /* UIDownloadDialog.xib in Resources */,
+				E8E0479217C3D1DC00DC4356 /* drafts.xml in Resources */,
+				E8E0479A17C3FB0800DC4356 /* UIDraftCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +477,13 @@
 				E841698D17C24D6000AAFCE3 /* zip.c in Sources */,
 				E841699317C24E1800AAFCE3 /* CHttpDownload.m in Sources */,
 				E841699617C26DB500AAFCE3 /* CWebViewController.m in Sources */,
+				E8E0478A17C3A77B00DC4356 /* CDraftViewController.m in Sources */,
+				E8E0478D17C3B7FD00DC4356 /* CInfoParser.m in Sources */,
+				E8E0479017C3BEAA00DC4356 /* CInfoModel.m in Sources */,
+				E8E0479517C3D96C00DC4356 /* CDraftsParser.m in Sources */,
+				E8E0479817C3D9B700DC4356 /* CDraftModel.m in Sources */,
+				E8E0479D17C3FBB200DC4356 /* CDraftItemCell.m in Sources */,
+				E8E047A017C410B900DC4356 /* CDraftItemParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,10 +562,12 @@
 		E826862717B97C53004281C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: José Vildósola Gatica (KWPKRXJ6DW)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Forms/Forms-Prefix.pch";
 				INFOPLIST_FILE = "Forms/Forms-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -515,10 +575,12 @@
 		E826862817B97C53004281C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: José Vildósola Gatica (KWPKRXJ6DW)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Forms/Forms-Prefix.pch";
 				INFOPLIST_FILE = "Forms/Forms-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

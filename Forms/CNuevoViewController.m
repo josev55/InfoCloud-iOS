@@ -128,9 +128,10 @@
 }
 
 -(void)didFailWithError:(NSError *)error{
-	[loadingView removeView];
+	
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[[[UIAlertView alloc] initWithTitle:@"Error" message:@"Hubo un error al descargar el archivo" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+		[loadingView removeView];
 	});
 }
 

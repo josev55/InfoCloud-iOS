@@ -46,13 +46,14 @@
                     <connections>
                         <outlet property="mMenuTableview" destination="DkK-Hk-9sT" id="NRL-zu-HDQ"/>
                         <segue destination="PkE-WS-XxB" kind="push" identifier="nuevo" id="cEp-vk-QDL"/>
+                        <segue destination="wz6-n6-BZM" kind="push" identifier="draft" id="FHp-T9-FcS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmN-9J-JZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2231" y="-381"/>
         </scene>
-        <!--Nuevo View Controller-->
+        <!--Nuevo View Controller - Nuevo-->
         <scene sceneID="0RG-Yv-PoE">
             <objects>
                 <viewController id="PkE-WS-XxB" customClass="CNuevoViewController" sceneMemberID="viewController">
@@ -68,7 +69,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="wMq-Ya-9Oh"/>
+                    <navigationItem key="navigationItem" title="Nuevo" id="wMq-Ya-9Oh"/>
                     <connections>
                         <outlet property="mNuevoTableView" destination="mej-jT-fMW" id="TPW-Hl-iHn"/>
                         <segue destination="I8n-6s-Wyz" kind="push" identifier="webview" id="sFq-sy-BSW"/>
@@ -78,6 +79,32 @@
             </objects>
             <point key="canvasLocation" x="-1562" y="-381"/>
         </scene>
+        <!--Draft View Controller - Borradores-->
+        <scene sceneID="XgC-wa-ASK">
+            <objects>
+                <viewController id="wz6-n6-BZM" customClass="CDraftViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="stv-wP-MAh">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="x4Z-T1-1Pw">
+                                <rect key="frame" x="-1" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Borradores" id="cK2-ca-FQk"/>
+                    <connections>
+                        <outlet property="mDraftTableView" destination="x4Z-T1-1Pw" id="FZZ-WH-tmc"/>
+                        <segue destination="I8n-6s-Wyz" kind="push" identifier="draftWeb" id="NoG-rz-M6N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mpk-CD-H9U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1562" y="258"/>
+        </scene>
         <!--Web View Controller-->
         <scene sceneID="snc-WE-GEW">
             <objects>
@@ -86,7 +113,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" id="kGb-YK-NGu">
+                            <webView multipleTouchEnabled="YES" contentMode="scaleToFill" id="kGb-YK-NGu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -104,10 +131,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxL-i5-V2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-916" y="-381"/>
+            <point key="canvasLocation" x="-922" y="-1"/>
         </scene>
     </scenes>
     <classes>
+        <class className="CDraftViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CDraftViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mDraftTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
         <class className="CMenuViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CMenuViewController.h"/>
             <relationships>
@@ -132,4 +165,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="NoG-rz-M6N"/>
+    </inferredMetricsTieBreakers>
 </document>

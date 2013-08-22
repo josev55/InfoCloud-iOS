@@ -22,18 +22,30 @@
 		[fileManager createDirectoryAtPath:formsMainDirectory withIntermediateDirectories:NO attributes:nil error:nil];
 		NSLog(@"Directory Created!");
 	}
-	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[CConnectionHelper getFormsURL]]];
+	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[CConnectionHelper getFormsURL]] cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:10];
 	NSURLResponse *response = nil;
 	NSError *error;
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	NSString *xmlForms = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	NSLog(@"%@",xmlForms);
-	NSString *filename = [NSString stringWithFormat:@"%@/myforms.xml",formsMainDirectory];
-	if ([fileManager fileExistsAtPath:filename]){
-		[fileManager removeItemAtPath:filename error:nil];
+	if (!error) {
+		NSLog(@"%@",error);
+		NSString *xmlForms = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+		NSLog(@"%@",xmlForms);
+		NSString *filename = [NSString stringWithFormat:@"%@/myforms.xml",formsMainDirectory];
+		if ([fileManager fileExistsAtPath:filename]){
+			[fileManager removeItemAtPath:filename error:nil];
+		}
+		[fileManager createFileAtPath:filename contents:data attributes:nil];
 	}
-	[fileManager createFileAtPath:filename contents:data attributes:nil];
-    return YES;
+	NSString *draftPath = [NSString stringWithFormat:@"%@/forms/drafts.xml",documentPath];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:draftPath]) {
+		NSString *draftResource = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"drafts.xml"];
+		NSError *error;
+		[[NSFileManager defaultManager] copyItemAtPath:draftResource toPath:draftPath error:&error];
+		if (error) {
+			NSLog(@"ERROR: %@",error);
+		}
+	}
+	    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

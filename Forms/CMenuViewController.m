@@ -80,6 +80,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	CGRect screen = [tableView bounds];
+	if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
+		return 120;
+	}
 	return screen.size.height / [self tableView:tableView numberOfRowsInSection:0];
 }
 
@@ -89,7 +92,9 @@
 		case 0:
 			[self performSegueWithIdentifier:@"nuevo" sender:nil];
 			break;
-			
+		case 1:
+			[self performSegueWithIdentifier:@"draft" sender:nil];
+			break;
 		default:
 			break;
 	}

@@ -30,9 +30,9 @@
 			NSString *file = [NSString stringWithFormat:@"%@/%@.zip",formLocation,formModel.directoryName];
 			[data writeToFile:file atomically:NO];
 			[SSZipArchive unzipFileAtPath:file toDestination:formLocation];
-			[[self delegate] didFinishedDownload:file];
+			[d didFinishedDownload:file];
 		} else {
-			[[self delegate] didFailWithError:error];
+			[d didFailWithError:error];
 		}
 	}];
 }
