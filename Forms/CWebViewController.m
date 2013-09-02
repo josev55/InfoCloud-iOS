@@ -12,6 +12,8 @@
 #import "CInfoModel.h"
 #import "CInfoParser.h"
 #import "CDraftsParser.h"
+#import "CDataItemParser.h"
+#import "Base64.h"
 
 @interface CWebViewController ()
 
@@ -65,14 +67,22 @@
 	self.navigationItem.title = form;
 	
 	NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+	NSString *baseURL = [htmlFile stringByDeletingLastPathComponent];
+	NSLog(@"%@",baseURL);
+	NSString *script = [NSString stringWithFormat:@"<script src='%@/jquery-2.0.3.js'></script><script src='%@/tmp.js'></script></body>",app.documentPath,app.documentPath];
+	htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</body>" withString:script];
 	if (isDraft) {
 		NSString *formFolder = [form stringByReplacingOccurrencesOfString:@" " withString:@"_"];
 		NSString *filePath = [NSString stringWithFormat:@"%@/forms/%@/%@",app.documentPath,formFolder,htmlFile];
+		baseURL = [filePath stringByDeletingLastPathComponent];
+		NSLog(@"%@",baseURL);
 		htmlString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+		htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</body>" withString:script];
+		
 	}
 	webView.delegate = self;
 	[[NSURLCache sharedURLCache] removeAllCachedResponses];
-	[webView loadHTMLString:htmlString baseURL:nil];
+	[webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:baseURL]];
 	if (isDraft) {
 		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Enviar" style:UIBarButtonItemStyleBordered target:self action:@selector(enviar)];
 
@@ -109,13 +119,14 @@
 }
 
 -(void) handleFunction:(NSString *)function withDataAsString:(NSString *)data{
+	if (isDraft) {
+		tmpPath = [form stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+	} else {
+		tmpPath = model.directoryName;
+	}
 	if ([function isEqualToString:@"save"]) {
 		
-		if (isDraft) {
-			tmpPath = [form stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-		} else {
-			tmpPath = model.directoryName;
-		}
+		
 		NSString *localData = [data stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		
 		infoPath = [NSString stringWithFormat:@"%@/forms/%@/info.xml",app.documentPath,tmpPath];
@@ -128,6 +139,15 @@
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mensaje" message:@"Datos Guardados" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		alert.delegate = self;
 		[alert show];
+	}
+	if([function isEqualToString:@"load_related"]){
+		NSArray *splitArgs = [data componentsSeparatedByString:@"$"];
+		CDataItemParser *dataParser = [[CDataItemParser alloc] initWithFilePath:[NSString stringWithFormat:@"%@/forms/%@/%@.xml",app.documentPath,tmpPath,[splitArgs objectAtIndex:0]]];
+		dataParser.prop = [splitArgs objectAtIndex:1];
+		[dataParser.parser parse];
+		NSString *json2 = [dataParser getDataAsJSON];
+		NSLog(@"JSON: %@",json2);
+		[webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"related_data('%@')",json2]];
 	}
 }
 
@@ -175,6 +195,12 @@
 		NSLog(@"JSON: %@",json);
 		[webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"loadData('%@')",json]];
 	}
+}
+
+-(void) sendData{
+	NSString *test = @"asdfghjklqwertyuio";
+	NSData *data = [test dataUsingEncoding:NSUTF8StringEncoding];
+	NSString *encoded = [data base64EncodedString];
 }
 
 //End of UIWebViewDelegate Implementation

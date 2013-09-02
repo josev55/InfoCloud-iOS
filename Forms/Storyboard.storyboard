@@ -24,7 +24,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opa-tW-oJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2833" y="-381"/>
+            <point key="canvasLocation" x="-3883" y="-161"/>
         </scene>
         <!--Menu View Controller - Menu-->
         <scene sceneID="KOl-7H-vw7">
@@ -47,11 +47,12 @@
                         <outlet property="mMenuTableview" destination="DkK-Hk-9sT" id="NRL-zu-HDQ"/>
                         <segue destination="PkE-WS-XxB" kind="push" identifier="nuevo" id="cEp-vk-QDL"/>
                         <segue destination="wz6-n6-BZM" kind="push" identifier="draft" id="FHp-T9-FcS"/>
+                        <segue destination="6zY-3I-kdQ" kind="push" identifier="outbox" id="8AE-fK-t5N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmN-9J-JZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2231" y="-381"/>
+            <point key="canvasLocation" x="-3281" y="-161"/>
         </scene>
         <!--Nuevo View Controller - Nuevo-->
         <scene sceneID="0RG-Yv-PoE">
@@ -77,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pne-rB-GF4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1562" y="-381"/>
+            <point key="canvasLocation" x="-2632" y="-800"/>
         </scene>
         <!--Draft View Controller - Borradores-->
         <scene sceneID="XgC-wa-ASK">
@@ -87,7 +88,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="x4Z-T1-1Pw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="x4Z-T1-1Pw">
                                 <rect key="frame" x="-1" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,7 +96,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Borradores" id="cK2-ca-FQk"/>
+                    <navigationItem key="navigationItem" title="Borradores" id="cK2-ca-FQk">
+                        <barButtonItem key="rightBarButtonItem" title="Editar" id="EPo-7r-PXV">
+                            <connections>
+                                <action selector="enterEdit:" destination="wz6-n6-BZM" id="xUp-Od-fL5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mDraftTableView" destination="x4Z-T1-1Pw" id="FZZ-WH-tmc"/>
                         <segue destination="I8n-6s-Wyz" kind="push" identifier="draftWeb" id="NoG-rz-M6N"/>
@@ -103,7 +110,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpk-CD-H9U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1562" y="258"/>
+            <point key="canvasLocation" x="-2632" y="-161"/>
+        </scene>
+        <!--Outbox View Controller - Bandeja de Salida-->
+        <scene sceneID="84T-3i-qEf">
+            <objects>
+                <viewController id="6zY-3I-kdQ" customClass="COutboxViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="idK-Vm-zpJ">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="sc0-aR-A1e">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Bandeja de Salida" id="H3K-gE-8JV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jdj-sM-KFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2630" y="497"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="snc-WE-GEW">
@@ -131,13 +160,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxL-i5-V2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-922" y="-1"/>
+            <point key="canvasLocation" x="-1992" y="-420"/>
         </scene>
     </scenes>
     <classes>
         <class className="CDraftViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CDraftViewController.h"/>
             <relationships>
+                <relationship kind="action" name="enterEdit:"/>
                 <relationship kind="outlet" name="mDraftTableView" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -152,6 +182,9 @@
             <relationships>
                 <relationship kind="outlet" name="mNuevoTableView" candidateClass="UITableView"/>
             </relationships>
+        </class>
+        <class className="COutboxViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/COutboxViewController.h"/>
         </class>
         <class className="CWebViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CWebViewController.h"/>

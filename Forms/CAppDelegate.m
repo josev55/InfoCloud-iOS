@@ -45,6 +45,22 @@
 			NSLog(@"ERROR: %@",error);
 		}
 	}
+	NSString *tmp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"tmp.js"];
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/tmp.js",documentPath]]) {
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/tmp.js",documentPath] error:nil];
+	}
+	[[NSFileManager defaultManager] copyItemAtPath:tmp toPath:[NSString stringWithFormat:@"%@/tmp.js",documentPath] error:&error];
+	if (error) {
+		NSLog(@"%@",error);
+	}
+	NSString *jquery = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jquery-2.0.3.js"];
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/jquery-2.0.3.js",documentPath]]) {
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/jquery-2.0.3.js",documentPath] error:nil];
+	}
+	[[NSFileManager defaultManager] copyItemAtPath:jquery toPath:[NSString stringWithFormat:@"%@/jquery-2.0.3.js",documentPath] error:&error];
+	if (error) {
+		NSLog(@"%@",error);
+	}
 	    return YES;
 }
 

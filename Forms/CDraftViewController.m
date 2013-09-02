@@ -85,6 +85,10 @@
 	return 90;
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 	NSArray *list = [self.mDraftDict objectForKey:[self.mDraftArray objectAtIndex:[indexPath section]]];
@@ -115,4 +119,7 @@
 
 //End of UITableViewDelegate Methods
 
+- (IBAction)enterEdit:(id)sender {
+	[self.mDraftTableView setEditing:YES];
+}
 @end

@@ -63,6 +63,10 @@
 	return menuItems.count;
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSString *identifier = @"Cell";
 	CMenuItemCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -94,6 +98,9 @@
 			break;
 		case 1:
 			[self performSegueWithIdentifier:@"draft" sender:nil];
+			break;
+		case 2:
+			[self performSegueWithIdentifier:@"outbox" sender:nil];
 			break;
 		default:
 			break;

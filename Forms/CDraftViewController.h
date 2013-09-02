@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *mDraftTableView;
 @property (strong, nonatomic) NSMutableArray *mDraftArray;
 @property (strong, nonatomic) NSMutableDictionary *mDraftDict;
+- (IBAction)enterEdit:(id)sender;
 
 @end
