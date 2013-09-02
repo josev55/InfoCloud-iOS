@@ -19,12 +19,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="6e8-rI-8f5" kind="relationship" relationship="rootViewController" id="R3c-wG-EVr"/>
+                        <segue destination="iXz-rD-FSL" kind="relationship" relationship="rootViewController" id="94U-lE-DG7"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opa-tW-oJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3883" y="-161"/>
+            <point key="canvasLocation" x="-4225" y="-161"/>
         </scene>
         <!--Menu View Controller - Menu-->
         <scene sceneID="KOl-7H-vw7">
@@ -53,6 +53,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmN-9J-JZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3281" y="-161"/>
+        </scene>
+        <!--Start View Controller-->
+        <scene sceneID="7kH-lT-bJu">
+            <objects>
+                <viewController id="iXz-rD-FSL" customClass="CStartViewController" sceneMemberID="viewController">
+                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="yIk-bB-2is">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" id="LJL-gE-ZTy">
+                                <rect key="frame" x="151" y="197" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18441970396020047" green="0.560776983912183" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="V0g-gp-SvW"/>
+                    <connections>
+                        <outlet property="loadingIndicator" destination="LJL-gE-ZTy" id="M89-ue-D0h"/>
+                        <segue destination="6e8-rI-8f5" kind="push" identifier="menu" id="SL0-F9-x5j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BFN-wX-JfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3780" y="-161"/>
         </scene>
         <!--Nuevo View Controller - Nuevo-->
         <scene sceneID="0RG-Yv-PoE">
@@ -128,7 +154,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Bandeja de Salida" id="H3K-gE-8JV"/>
+                    <navigationItem key="navigationItem" title="Bandeja de Salida" id="H3K-gE-8JV">
+                        <barButtonItem key="rightBarButtonItem" title="Sync" id="hxA-jv-zlq">
+                            <connections>
+                                <action selector="sincronizar:" destination="6zY-3I-kdQ" id="IfP-JG-YSl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mTableView" destination="sc0-aR-A1e" id="gw7-Ui-BXF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jdj-sM-KFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -185,6 +220,16 @@
         </class>
         <class className="COutboxViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/COutboxViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sincronizar:"/>
+                <relationship kind="outlet" name="mTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CStartViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CStartViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
         </class>
         <class className="CWebViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CWebViewController.h"/>

@@ -27,8 +27,14 @@
 	BOOL isDraft;
 	NSString *tmpPath;
 	NSString *json;
+	BOOL isSendingData;
+	NSString *draftFilename;
 }
 @synthesize webView,model;
+
+-(void)setDraftFilename:(NSString *)draftFile{
+	draftFilename = draftFile;
+}
 
 -(void)setJson:(NSString *)jsonData{
 	json = jsonData;
@@ -48,6 +54,10 @@
 
 -(void)setIsDraft{
 	isDraft = YES;
+}
+
+-(void)setIsSendiongData:(BOOL) value{
+	isSendingData = value;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -87,6 +97,7 @@
 		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Enviar" style:UIBarButtonItemStyleBordered target:self action:@selector(enviar)];
 
 	}
+	[self setIsSendiongData:NO];
 }
 
 -(void) setIphone{
@@ -101,7 +112,10 @@
 }
 
 -(void) enviar{
-	
+	[self setIsSendiongData:YES];
+
+	[[[UIAlertView alloc] initWithTitle:@"Prueba de boton" message:isSendingData ? @"YES" : @"NO" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+	[webView stringByEvaluatingJavaScriptFromString:@"save()"];
 }
 
 //UIWebViewDelegate Implementation
@@ -133,12 +147,23 @@
 		CInfoParser *parser = [[CInfoParser alloc] initWithFile:infoPath];
 		[parser parse];
 		CInfoModel *infoModel = [parser infoModel];
-		[self modifyInfoXML:infoModel];
-		NSString *draftFile = [NSString stringWithFormat:@"%@/forms/draft_%@_%d.xml",app.documentPath,tmpPath,infoModel.lastCopy.integerValue];
-		[localData writeToFile:draftFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mensaje" message:@"Datos Guardados" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		alert.delegate = self;
-		[alert show];
+		if (!isSendingData) {
+			[self modifyInfoXML:infoModel];
+			NSString *draftFile = [NSString stringWithFormat:@"%@/forms/draft_%@_%d.xml",app.documentPath,tmpPath,infoModel.lastCopy.integerValue];
+			[localData writeToFile:draftFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mensaje" message:@"Datos Guardados" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			alert.delegate = self;
+			[alert show];
+		} else {
+			NSMutableDictionary *plistDict = [NSMutableDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath]];
+			[plistDict setValue:[NSString stringWithFormat:@"%@/forms/%@.xml",app.documentPath,draftFilename] forKey:[draftFilename stringByReplacingOccurrencesOfString:@"draft_" withString:@""]];
+			[plistDict writeToFile:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath] atomically:NO];
+			[self modifyDraftXML:draftFilename];
+			NSLog(@"%@",plistDict);
+			NSLog(@"%@",[form stringByReplacingOccurrencesOfString:@" " withString:@"_"]);
+			[[self delegate] didReloadDataAtDataSource];
+			
+		}
 	}
 	if([function isEqualToString:@"load_related"]){
 		NSArray *splitArgs = [data componentsSeparatedByString:@"$"];
@@ -149,6 +174,19 @@
 		NSLog(@"JSON: %@",json2);
 		[webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"related_data('%@')",json2]];
 	}
+}
+
+-(void)modifyDraftXML:(NSString *)draftName{
+	NSError *error;
+	NSString *xmlDraft = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/forms/drafts.xml",app.documentPath] encoding:NSUTF8StringEncoding error:&error];
+	
+	NSLog(@"%@",[NSString stringWithFormat:@"<draft><refName>%@</refName><data>%@</data></draft>",[form stringByReplacingOccurrencesOfString:@" " withString:@"_"],draftName]);
+	xmlDraft = [xmlDraft stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"<draft><refName>%@</refName><data>%@</data></draft>",[form stringByReplacingOccurrencesOfString:@" " withString:@"_"],draftName] withString:@""];
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/forms/drafts.xml",app.documentPath]]) {
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/forms/drafts.xml",app.documentPath] error:&error];
+	}
+	[xmlDraft writeToFile:[NSString stringWithFormat:@"%@/forms/drafts.xml",app.documentPath] atomically:NO encoding:NSUTF8StringEncoding error:&error];
 }
 
 -(void)modifyInfoXML:(CInfoModel *)infoModel{
@@ -202,6 +240,8 @@
 	NSData *data = [test dataUsingEncoding:NSUTF8StringEncoding];
 	NSString *encoded = [data base64EncodedString];
 }
+
+
 
 //End of UIWebViewDelegate Implementation
 

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COutboxViewController : UIViewController
+@interface COutboxViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray *mOutboxArray;
+@property (nonatomic, strong) NSXMLParser *parser;
+@property (weak, nonatomic) IBOutlet UITableView *mTableView;
+- (IBAction)sincronizar:(id)sender;
 
 @end

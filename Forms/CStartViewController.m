@@ -1,30 +1,60 @@
 //
-//  CAppDelegate.m
+//  CStartViewController.m
 //  Forms
 //
-//  Created by Jose Vildosola on 12-08-13.
+//  Created by Jose Vildosola on 02-09-13.
 //  Copyright (c) 2013 Jose Vildosola. All rights reserved.
 //
 
-#import "CAppDelegate.h"
+#import "CStartViewController.h"
 #import "CConnectionHelper.h"
+#import "Reachability.h"
 
-@implementation CAppDelegate
-@synthesize documentPath;
+@interface CStartViewController ()
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+@end
+
+@implementation CStartViewController
+@synthesize loadingIndicator,documentPath,app;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	app = (CAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[[[self navigationController] navigationBar] setHidden:YES];
+	[loadingIndicator startAnimating];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self setInitialResources];
+	});
+	// Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)setInitialResources{
+
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	documentPath = ([paths count] > 0 ? [paths objectAtIndex:0] : nil);
-	/*
 	NSString *formsMainDirectory = [NSString stringWithFormat:@"%@/forms",documentPath];
 	NSFileManager *fileManager = [[NSFileManager alloc] init];
 	if (![fileManager fileExistsAtPath:formsMainDirectory]) {
 		[fileManager createDirectoryAtPath:formsMainDirectory withIntermediateDirectories:NO attributes:nil error:nil];
 		NSLog(@"Directory Created!");
 	}
-	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[CConnectionHelper getFormsURL]] cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:10];
+	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[CConnectionHelper getFormsURL]] cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:5];
 	NSURLResponse *response = nil;
 	NSError *error;
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
@@ -37,20 +67,23 @@
 			[fileManager removeItemAtPath:filename error:nil];
 		}
 		[fileManager createFileAtPath:filename contents:data attributes:nil];
+	} else {
+		NSLog(@"ERROR: %@",error);
 	}
 	NSString *draftPath = [NSString stringWithFormat:@"%@/forms/drafts.xml",documentPath];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:draftPath]) {
 		NSString *draftResource = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"drafts.xml"];
-		NSError *error;
-		[[NSFileManager defaultManager] copyItemAtPath:draftResource toPath:draftPath error:&error];
-		if (error) {
-			NSLog(@"ERROR: %@",error);
+		NSError *error2;
+		[[NSFileManager defaultManager] copyItemAtPath:draftResource toPath:draftPath error:&error2];
+		if (error2) {
+			NSLog(@"ERROR: %@",error2);
 		}
 	}
 	NSString *tmp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"tmp.js"];
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/tmp.js",documentPath]]) {
 		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/tmp.js",documentPath] error:nil];
 	}
+	error = nil;
 	[[NSFileManager defaultManager] copyItemAtPath:tmp toPath:[NSString stringWithFormat:@"%@/tmp.js",documentPath] error:&error];
 	if (error) {
 		NSLog(@"%@",error);
@@ -59,38 +92,20 @@
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/jquery-2.0.3.js",documentPath]]) {
 		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/jquery-2.0.3.js",documentPath] error:nil];
 	}
+	error = nil;
 	[[NSFileManager defaultManager] copyItemAtPath:jquery toPath:[NSString stringWithFormat:@"%@/jquery-2.0.3.js",documentPath] error:&error];
 	if (error) {
 		NSLog(@"%@",error);
-	}*/
-	    return YES;
+	}
+	
+	if (![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath]]) {
+		NSString *outboxPlist = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"outbox.plist"];
+		error = nil;
+		[[NSFileManager defaultManager] copyItemAtPath:outboxPlist toPath:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath] error:&error];
+		if (error) {
+			NSLog(@"ERROR: %@",error);
+		}
+	}
+	[self performSegueWithIdentifier:@"menu" sender:nil];
 }
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
 @end

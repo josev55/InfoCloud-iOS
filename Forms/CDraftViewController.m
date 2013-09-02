@@ -23,6 +23,8 @@
 	NSString *htmlFile;
 	NSString *formName;
 	NSString *json;
+	NSString *draftFile;
+	CWebViewController *webView;
 }
 @synthesize mDraftArray, mDraftTableView, mDraftDict;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,8 +39,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	[self.mDraftTableView reloadData];
 	self.mDraftTableView.dataSource = self;
 	self.mDraftTableView.delegate = self;
+	
 	app = (CAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	CDraftsParser *parser = [[CDraftsParser alloc] initWithFilePath:[NSString stringWithFormat:@"%@/forms/drafts.xml",app.documentPath]];
@@ -103,15 +107,18 @@
 	CDraftItemParser *parser = [[CDraftItemParser alloc] initWithFilePath:[NSString stringWithFormat:@"%@/forms/%@.xml",app.documentPath,model.data]];
 	[[parser parser] parse];
 	json = [parser getDataAsJSON];
+	draftFile = model.data;
 	[self performSegueWithIdentifier:@"draftWeb" sender:nil];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 	if ([[segue identifier] isEqualToString:@"draftWeb"]) {
 		CWebViewController *web = [segue destinationViewController];
+		web.delegate = self;
 		[web setIsDraft];
 		[web setHtmlFile:htmlFile];
 		[web setFormName:formName];
+		[web setDraftFilename:draftFile];
 		[web setJson:[json stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
 
 	}
@@ -120,6 +127,14 @@
 //End of UITableViewDelegate Methods
 
 - (IBAction)enterEdit:(id)sender {
-	[self.mDraftTableView setEditing:YES];
+	[self.mDraftTableView reloadData];
+}
+
+-(void)didReloadDataAtDataSource{
+	CDraftsParser *parser = [[CDraftsParser alloc] initWithFilePath:[NSString stringWithFormat:@"%@/forms/drafts.xml",app.documentPath]];
+	[parser parse];
+	self.mDraftDict = [parser mDraftDict];
+	self.mDraftArray = [[mDraftDict allKeys] mutableCopy];
+	[self.mDraftTableView reloadData];
 }
 @end

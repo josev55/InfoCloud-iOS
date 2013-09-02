@@ -29,6 +29,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	[[[self navigationController]navigationBar] setHidden:NO];
+	NSMutableArray *navigationStack = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+	[navigationStack removeObjectAtIndex:[navigationStack count] - 2];
+	self.navigationController.viewControllers = navigationStack;
 	self.mMenuTableview.delegate = self;
 	self.mMenuTableview.dataSource = self;
 	menuItems = [[NSMutableArray alloc] init];
