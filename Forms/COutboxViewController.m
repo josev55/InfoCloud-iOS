@@ -10,10 +10,11 @@
 #import "COutboxItemCell.h"
 #import "COutboxModel.h"
 #import "CAppDelegate.h"
+#import "Base64.h"
 
 @interface COutboxViewController (){
 	CAppDelegate *app;
-	NSDictionary *dict;
+	NSMutableDictionary *dict;
 }
 
 @end
@@ -35,7 +36,7 @@
 	self.mTableView.dataSource = self;
 	self.mTableView.delegate = self;
 	app = (CAppDelegate *)[[UIApplication sharedApplication] delegate];
-	dict = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath]];
+	dict = [NSMutableDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath]];
 	self.mOutboxArray = [[dict allKeys] mutableCopy];
 	// Do any additional setup after loading the view.
 }
@@ -70,6 +71,46 @@
 }
 
 - (IBAction)sincronizar:(id)sender {
-	
+	NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath]];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		
+		
+		for (NSString *value in dictionary) {
+			NSString *content = [dictionary objectForKey:value];
+			NSError *error;
+			NSString *encoded = [[NSString stringWithContentsOfFile:content encoding:NSUTF8StringEncoding error:&error] stringByAddingPercentEscapesUsingEncoding:NSStringEncodingConversionAllowLossy];
+			if (error) {
+				NSLog(@"ERROR: %@",error);
+			}
+			NSLog(@"%@",encoded);
+			NSData *data = [encoded dataUsingEncoding:NSUTF8StringEncoding];
+			NSString *data64 = [data base64EncodedString];
+			NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://formulariosweb.colabra.cl/api/mobile"] cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:10];
+			[request setHTTPMethod:@"POST"];
+			[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+			NSString *postData = [NSString stringWithFormat:@"filename=%@&encodedFile=%@",value,data64];
+			[request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+			NSURLResponse *response;
+			error = nil;
+			NSData *mydata = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+			if (!error) {
+				NSString *dataString = [[NSString alloc] initWithData:mydata encoding:NSUTF8StringEncoding];
+				[dict removeObjectForKey:[dataString stringByReplacingOccurrencesOfString:@".xml" withString:@""]];
+				if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath]]) {
+					NSError *error;
+					[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath] error:&error];
+					if (error) {
+						NSLog(@"ERROR: %@",error);
+					}
+				}
+				[self reload];
+				[self.mTableView reloadData];
+			}
+		}
+	});
+}
+-(void)reload{
+	dict = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath]];
+	self.mOutboxArray = [[dict allKeys] mutableCopy];
 }
 @end
