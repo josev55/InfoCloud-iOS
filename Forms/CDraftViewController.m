@@ -25,6 +25,7 @@
 	NSString *json;
 	NSString *draftFile;
 	CWebViewController *webView;
+	BOOL flag;
 }
 @synthesize mDraftArray, mDraftTableView, mDraftDict;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,6 +35,25 @@
         // Custom initialization
     }
     return self;
+}
+
+- (BOOL)shouldAutorotate{
+	return [self.mDraftArray count] == 0 ? false : true;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+	if ([self.mDraftArray count] == 0) {
+		return UIInterfaceOrientationMaskPortrait;
+	}
+	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscape;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft | toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+		[self willRotateToInterfaceOrientation:UIInterfaceOrientationPortrait duration:0];
+	}	
+	NSLog(@"ro: %@",flag ? @"YES" : @"NO");
 }
 
 - (void)viewDidLoad
@@ -66,49 +86,69 @@
 	if (cell == nil) {
 		cell = (CDraftItemCell *)[[[NSBundle mainBundle] loadNibNamed:@"UIDraftCell" owner:self options:nil] objectAtIndex:0];
 	}
-	NSArray *listData = [self.mDraftDict objectForKey:[self.mDraftArray objectAtIndex:[indexPath section]]];
-	CDraftModel *model = [listData objectAtIndex:indexPath.row];
-	cell.mDraftImage.image = [UIImage imageNamed:@"notepad.png"];
-	cell.mDraftLabel.text = [[model.data stringByReplacingOccurrencesOfString:@"draft_" withString:@""] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+	if ([self.mDraftArray count] == 0) {
+		cell.mDraftLabel.text = @"No hay datos";
+	} else {
+		NSArray *listData = [self.mDraftDict objectForKey:[self.mDraftArray objectAtIndex:[indexPath section]]];
+		CDraftModel *model = [listData objectAtIndex:indexPath.row];
+		cell.mDraftImage.image = [UIImage imageNamed:@"notepad.png"];
+		cell.mDraftLabel.text = [[model.data stringByReplacingOccurrencesOfString:@"draft_" withString:@""] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+	}
 	return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+	if ([self.mDraftArray count] == 0) {
+		return 1;
+	}
 	NSArray *list = [self.mDraftDict objectForKey:[self.mDraftArray objectAtIndex:section]];
 	return list.count;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+	if ([self.mDraftArray count] == 0) {
+		return 1;
+	}
 	return self.mDraftArray.count;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+	if ([self.mDraftArray count] == 0) {
+		return @"";
+	}
 	return [[self.mDraftArray objectAtIndex:section] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	if ([self.mDraftArray count] == 0) {
+		return self.mDraftTableView.bounds.size.height;
+	}
 	return 90;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-
+	
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	[tableView deselectRowAtIndexPath:indexPath animated:NO];
-	NSArray *list = [self.mDraftDict objectForKey:[self.mDraftArray objectAtIndex:[indexPath section]]];
-	CDraftModel *model = [list objectAtIndex:indexPath.row];
-	formName = [model.refName stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-	NSString *path = [NSString stringWithFormat:@"%@/forms/%@",app.documentPath,model.refName];
-	for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil]) {
-		if ([[file pathExtension] isEqualToString:@"html"]) {
-			htmlFile = file;
+	if ([self.mDraftArray count] == 0) {
+		[tableView deselectRowAtIndexPath:indexPath animated:NO];
+	} else {
+		[tableView deselectRowAtIndexPath:indexPath animated:NO];
+		NSArray *list = [self.mDraftDict objectForKey:[self.mDraftArray objectAtIndex:[indexPath section]]];
+		CDraftModel *model = [list objectAtIndex:indexPath.row];
+		formName = [model.refName stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+		NSString *path = [NSString stringWithFormat:@"%@/forms/%@",app.documentPath,model.refName];
+		for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil]) {
+			if ([[file pathExtension] isEqualToString:@"html"]) {
+				htmlFile = file;
+			}
 		}
+		CDraftItemParser *parser = [[CDraftItemParser alloc] initWithFilePath:[NSString stringWithFormat:@"%@/forms/%@.xml",app.documentPath,model.data]];
+		[[parser parser] parse];
+		json = [parser getDataAsJSON];
+		draftFile = model.data;
+		[self performSegueWithIdentifier:@"draftWeb" sender:nil];
 	}
-	CDraftItemParser *parser = [[CDraftItemParser alloc] initWithFilePath:[NSString stringWithFormat:@"%@/forms/%@.xml",app.documentPath,model.data]];
-	[[parser parser] parse];
-	json = [parser getDataAsJSON];
-	draftFile = model.data;
-	[self performSegueWithIdentifier:@"draftWeb" sender:nil];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -120,7 +160,6 @@
 		[web setFormName:formName];
 		[web setDraftFilename:draftFile];
 		[web setJson:[json stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
-
 	}
 }
 

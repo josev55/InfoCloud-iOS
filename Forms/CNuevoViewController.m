@@ -60,6 +60,9 @@
 // UITableView DataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+	if ([self.mNuevoArray count] == 0) {
+		return 1;
+	}
 	return self.mNuevoArray.count;
 }
 
@@ -74,20 +77,25 @@
 	if (cell == nil) {
 		cell = (CNuevoItemCell*)[[[NSBundle mainBundle] loadNibNamed:@"UINuevoCell" owner:self options:nil] objectAtIndex:0];
 	}
-	NSLog(@"%@", formModel.name);
-	NSLog(@"%@", cell.mNuevoLabel);
-	cell.mNuevoLabel.text = formModel.name;
-	cell.mNuevoImage.image = [UIImage imageNamed:@"document.png"];
-	NSString *formPath = [NSString stringWithFormat:@"%@/forms/%@",appDelegate.documentPath,formModel.directoryName];
-	if (![[NSFileManager defaultManager] fileExistsAtPath:formPath]) {
-		cell.mNuevoImage.image = [UIImage imageNamed:@"download.png"];
-		UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnImageTap:)];
-		[cell.mNuevoImage addGestureRecognizer:tapGestureRecognizer];
+	if ([self.mNuevoArray count] == 0) {
+		cell.mNuevoLabel.text = @"No hay datos disponibles";
+	} else {
+		cell.mNuevoLabel.text = formModel.name;
+		cell.mNuevoImage.image = [UIImage imageNamed:@"document.png"];
+		NSString *formPath = [NSString stringWithFormat:@"%@/forms/%@",appDelegate.documentPath,formModel.directoryName];
+		if (![[NSFileManager defaultManager] fileExistsAtPath:formPath]) {
+			cell.mNuevoImage.image = [UIImage imageNamed:@"download.png"];
+			UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnImageTap:)];
+			[cell.mNuevoImage addGestureRecognizer:tapGestureRecognizer];
+		}
 	}
 	return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	if ([self.mNuevoArray count] == 0) {
+		return self.mNuevoTableView.bounds.size.height;
+	}
 	return 90;
 }
 
@@ -141,7 +149,7 @@
 		[view setHtmlFile:tmp];
 		[view setFormName:tmpName];
 		[view setFormModel:model];
-
+		
 	}
 }
 @end

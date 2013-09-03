@@ -52,6 +52,9 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+	if ([self.mOutboxArray count] == 0) {
+		return 1;
+	}
 	return self.mOutboxArray.count;
 }
 
@@ -61,12 +64,20 @@
 	if (cell == nil) {
 		cell = (COutboxItemCell *)[[[NSBundle mainBundle] loadNibNamed:@"UIOutboxCell" owner:self options:nil] objectAtIndex:0];
 	}
-	cell.mOutboxImg.image = [UIImage imageNamed:@"edit.png"];
-	cell.mOutboxLabel.text = [self.mOutboxArray objectAtIndex:indexPath.row];
+	if ([self.mOutboxArray count] == 0) {
+		cell.mOutboxLabel.text = @"No hay datos";
+		
+	} else {
+		cell.mOutboxImg.image = [UIImage imageNamed:@"edit.png"];
+		cell.mOutboxLabel.text = [self.mOutboxArray objectAtIndex:indexPath.row];
+	}
 	return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	if ([self.mOutboxArray count] == 0) {
+		return self.mTableView.bounds.size.height;
+	}
 	return 90;
 }
 
@@ -102,9 +113,10 @@
 					if (error) {
 						NSLog(@"ERROR: %@",error);
 					}
+					
+					[self reload];
+					[self.mTableView reloadData];
 				}
-				[self reload];
-				[self.mTableView reloadData];
 			}
 		}
 	});
