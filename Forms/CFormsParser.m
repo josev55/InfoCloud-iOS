@@ -12,7 +12,7 @@
 @synthesize parser, chars, formModel, formularios;
 
 - (id) initWithFile:(NSString *) filePath{
-	if ([super init] != nil) {
+	if ((self = [super init]) != nil) {
 		formularios = [[NSMutableArray alloc] init];
 		NSData *data = [[NSFileManager defaultManager] contentsAtPath:filePath];
 		parser = [[NSXMLParser alloc] initWithData:data];

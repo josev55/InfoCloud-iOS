@@ -87,7 +87,7 @@
 		cell = (CDraftItemCell *)[[[NSBundle mainBundle] loadNibNamed:@"UIDraftCell" owner:self options:nil] objectAtIndex:0];
 	}
 	if ([self.mDraftArray count] == 0) {
-		cell.mDraftLabel.text = @"No hay datos";
+		cell.mDraftLabel.text = @"";
 	} else {
 		NSArray *listData = [self.mDraftDict objectForKey:[self.mDraftArray objectAtIndex:[indexPath section]]];
 		CDraftModel *model = [listData objectAtIndex:indexPath.row];
@@ -127,6 +127,13 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
 	
+}
+
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+	if (self.mDraftArray.count == 0) {
+		return NO;
+	}
+	return YES;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

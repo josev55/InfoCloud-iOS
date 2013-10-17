@@ -1477,6 +1477,7 @@ local int unz64local_CheckCurrentFileCoherencyHeader (unz64_s* s, uInt* piSizeVa
   Open for reading data the current file in the zipfile.
   If there is no error and the file is opened, the return value is UNZ_OK.
 */
+
 extern int ZEXPORT unzOpenCurrentFile3 (unzFile file, int* method,
                                             int* level, int raw, const char* password)
 {
@@ -1484,8 +1485,8 @@ extern int ZEXPORT unzOpenCurrentFile3 (unzFile file, int* method,
     uInt iSizeVar;
     unz64_s* s;
     file_in_zip64_read_info_s* pfile_in_zip_read_info;
-    ZPOS64_T offset_local_extrafield;  /* offset of the local extra field */
-    uInt  size_local_extrafield;    /* size of the local extra field */
+    ZPOS64_T offset_local_extrafield;
+    uInt  size_local_extrafield;
 #    ifndef NOUNCRYPT
     char source[12];
 #    else
@@ -1538,9 +1539,8 @@ extern int ZEXPORT unzOpenCurrentFile3 (unzFile file, int* method,
     }
 
     if ((s->cur_file_info.compression_method!=0) &&
-/* #ifdef HAVE_BZIP2 */
         (s->cur_file_info.compression_method!=Z_BZIP2ED) &&
-/* #endif */
+
         (s->cur_file_info.compression_method!=Z_DEFLATED))
 	{
 #ifndef __clang_analyzer__
@@ -1602,13 +1602,6 @@ extern int ZEXPORT unzOpenCurrentFile3 (unzFile file, int* method,
         TRYFREE(pfile_in_zip_read_info);
         return err;
       }
-        /* windowBits is passed < 0 to tell that there is no zlib header.
-         * Note that in this case inflate *requires* an extra "dummy" byte
-         * after the compressed stream in order to complete decompression and
-         * return Z_STREAM_END.
-         * In unzip, i don't wait absolutely Z_STREAM_END because I known the
-         * size of both compressed and uncompressed data
-         */
     }
     pfile_in_zip_read_info->rest_read_compressed =
             s->cur_file_info.compressed_size ;
@@ -1650,6 +1643,7 @@ extern int ZEXPORT unzOpenCurrentFile3 (unzFile file, int* method,
 
     return UNZ_OK;
 }
+
 
 extern int ZEXPORT unzOpenCurrentFile (unzFile file)
 {

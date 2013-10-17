@@ -14,7 +14,7 @@
 @synthesize parser, infoModel;
 
 -(id)initWithFile:(NSString *)filePath{
-	if ([super init] != nil) {
+	if ((self = [super init]) != nil) {
 		parser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:filePath]];
 		parser.delegate = self;
 		infoModel = [[CInfoModel alloc] init];

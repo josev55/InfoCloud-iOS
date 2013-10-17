@@ -42,6 +42,7 @@
 		E826866C17BA6D9D004281C0 /* CNuevoItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E826866B17BA6D9D004281C0 /* CNuevoItemCell.m */; };
 		E826866E17BAB51F004281C0 /* UIDownloadDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = E826866D17BAB51E004281C0 /* UIDownloadDialog.xib */; };
 		E826867117BABE43004281C0 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E826867017BABE43004281C0 /* LoadingView.m */; };
+		E839D8771803291900BC6888 /* CIngresoLCUParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E839D8761803291900BC6888 /* CIngresoLCUParser.m */; };
 		E841697F17C24CA800AAFCE3 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = E841697E17C24CA800AAFCE3 /* SSZipArchive.m */; };
 		E841698A17C24D6000AAFCE3 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = E841698217C24D6000AAFCE3 /* ioapi.c */; };
 		E841698B17C24D6000AAFCE3 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = E841698417C24D6000AAFCE3 /* mztools.c */; };
@@ -70,7 +71,6 @@
 		E8E0479D17C3FBB200DC4356 /* CDraftItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0479C17C3FBB200DC4356 /* CDraftItemCell.m */; };
 		E8E047A017C410B900DC4356 /* CDraftItemParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E0479F17C410B900DC4356 /* CDraftItemParser.m */; };
 		E8E302B517CD684800A14AFB /* tmp.js in Resources */ = {isa = PBXBuildFile; fileRef = E8E302B317CD664800A14AFB /* tmp.js */; };
-		E8E302B717CE3DE200A14AFB /* iconapp.png in Resources */ = {isa = PBXBuildFile; fileRef = E8E302B617CE3DE200A14AFB /* iconapp.png */; };
 		E8E302BA17CE3E3300A14AFB /* jquery-2.0.3.js in Resources */ = {isa = PBXBuildFile; fileRef = E8E302B817CE3E2300A14AFB /* jquery-2.0.3.js */; };
 		E8E302BD17CE97A200A14AFB /* CDataItemParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E302BC17CE97A200A14AFB /* CDataItemParser.m */; };
 		E8E302C017CE99CC00A14AFB /* CRelatedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E302BF17CE99CC00A14AFB /* CRelatedItem.m */; };
@@ -125,6 +125,8 @@
 		E826866D17BAB51E004281C0 /* UIDownloadDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIDownloadDialog.xib; sourceTree = "<group>"; };
 		E826866F17BABE42004281C0 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		E826867017BABE43004281C0 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		E839D8751803291900BC6888 /* CIngresoLCUParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIngresoLCUParser.h; sourceTree = "<group>"; };
+		E839D8761803291900BC6888 /* CIngresoLCUParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIngresoLCUParser.m; sourceTree = "<group>"; };
 		E841697D17C24CA700AAFCE3 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		E841697E17C24CA800AAFCE3 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		E841698117C24D6000AAFCE3 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
@@ -275,9 +277,8 @@
 		E826862B17B97F32004281C0 /* UIFiles */ = {
 			isa = PBXGroup;
 			children = (
-				E826866F17BABE42004281C0 /* LoadingView.h */,
-				E826867017BABE43004281C0 /* LoadingView.m */,
 				E826866917BA6D60004281C0 /* UIModels */,
+				E8D952EC180F3C340001B9B7 /* LoadingView */,
 				E826862917B97E5E004281C0 /* Storyboard.storyboard */,
 				E826865017B9926A004281C0 /* UIMenuCell.xib */,
 				E826866717BA6C34004281C0 /* UINuevoCell.xib */,
@@ -354,6 +355,7 @@
 		E826865C17B9A59F004281C0 /* XMLParsers */ = {
 			isa = PBXGroup;
 			children = (
+				E839D8741803290100BC6888 /* DemoParser */,
 				E826865D17B9A5FF004281C0 /* CFormsParser.h */,
 				E826865E17B9A5FF004281C0 /* CFormsParser.m */,
 				E8E0478B17C3B7FD00DC4356 /* CInfoParser.h */,
@@ -392,6 +394,15 @@
 			name = UIModels;
 			sourceTree = "<group>";
 		};
+		E839D8741803290100BC6888 /* DemoParser */ = {
+			isa = PBXGroup;
+			children = (
+				E839D8751803291900BC6888 /* CIngresoLCUParser.h */,
+				E839D8761803291900BC6888 /* CIngresoLCUParser.m */,
+			);
+			name = DemoParser;
+			sourceTree = "<group>";
+		};
 		E841698017C24D6000AAFCE3 /* minizip */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,6 +435,15 @@
 				E841699517C26DB500AAFCE3 /* CWebViewController.m */,
 			);
 			name = Web;
+			sourceTree = "<group>";
+		};
+		E8D952EC180F3C340001B9B7 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				E826866F17BABE42004281C0 /* LoadingView.h */,
+				E826867017BABE43004281C0 /* LoadingView.m */,
+			);
+			name = LoadingView;
 			sourceTree = "<group>";
 		};
 		E8DF5D4F17D4C5EA00FD161E /* Outbox */ = {
@@ -480,8 +500,13 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = C;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Jose Vildosola";
+				TargetAttributes = {
+					E826860817B97C51004281C0 = {
+						DevelopmentTeam = 8MUW39W224;
+					};
+				};
 			};
 			buildConfigurationList = E826860417B97C51004281C0 /* Build configuration list for PBXProject "Forms" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -530,7 +555,6 @@
 				E826866E17BAB51F004281C0 /* UIDownloadDialog.xib in Resources */,
 				E8E0479217C3D1DC00DC4356 /* drafts.xml in Resources */,
 				E8E0479A17C3FB0800DC4356 /* UIDraftCell.xib in Resources */,
-				E8E302B717CE3DE200A14AFB /* iconapp.png in Resources */,
 				E8DF5D5417D4C9CB00FD161E /* outbox.plist in Resources */,
 				E8DF5D7017D534FF00FD161E /* UIOutboxCell.xib in Resources */,
 			);
@@ -568,6 +592,7 @@
 				E8E0479817C3D9B700DC4356 /* CDraftModel.m in Sources */,
 				E8E0479D17C3FBB200DC4356 /* CDraftItemCell.m in Sources */,
 				E8E047A017C410B900DC4356 /* CDraftItemParser.m in Sources */,
+				E839D8771803291900BC6888 /* CIngresoLCUParser.m in Sources */,
 				E8E302BD17CE97A200A14AFB /* CDataItemParser.m in Sources */,
 				E8E302C017CE99CC00A14AFB /* CRelatedItem.m in Sources */,
 				E88C48B117CFD46500188D31 /* Base64.m in Sources */,
@@ -654,7 +679,8 @@
 		E826862717B97C53004281C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: José Vildósola Gatica (KWPKRXJ6DW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Forms/Forms-Prefix.pch";
 				INFOPLIST_FILE = "Forms/Forms-Info.plist";
@@ -671,7 +697,8 @@
 		E826862817B97C53004281C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: José Vildósola Gatica (KWPKRXJ6DW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Forms/Forms-Prefix.pch";
 				INFOPLIST_FILE = "Forms/Forms-Info.plist";

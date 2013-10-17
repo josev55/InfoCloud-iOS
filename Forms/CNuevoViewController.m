@@ -114,7 +114,15 @@
 //End of UITableView DataSource
 
 -(void) OnImageTap:(id) sender{
-	if ([[[[sender view] superview] superview] isKindOfClass:[CNuevoItemCell class]]) {
+	BOOL isSuperview = NO;
+	NSLog(@"%@",[[[[[sender view] superview] superview] superview] class]);
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		isSuperview = [[[[[sender view] superview] superview] superview] isKindOfClass:[CNuevoItemCell class]];
+	} else {
+		NSLog(@"%@",[[[[sender view] superview] superview] class]);
+		isSuperview = [[[[sender view] superview] superview] isKindOfClass:[CNuevoItemCell class]];
+	}
+	if (isSuperview) {
 		CNuevoItemCell *itemCell = (CNuevoItemCell*)[[[sender view] superview] superview];
 		NSIndexPath *indexPath = [self.mNuevoTableView indexPathForCell:itemCell];
 		NSLog(@"%@",[[self.mNuevoArray objectAtIndex:indexPath.row] directoryName]);

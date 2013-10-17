@@ -106,13 +106,13 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	loadingLabel.text = NSLocalizedString(@"Loading...", nil);
 	loadingLabel.textColor = [UIColor whiteColor];
 	loadingLabel.backgroundColor = [UIColor clearColor];
-	loadingLabel.textAlignment = UITextAlignmentCenter;
 	loadingLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-	loadingLabel.autoresizingMask =
+	loadingLabel.textAlignment = NSTextAlignmentCenter;
+	/*loadingLabel.autoresizingMask =
 		UIViewAutoresizingFlexibleLeftMargin |
 		UIViewAutoresizingFlexibleRightMargin |
 		UIViewAutoresizingFlexibleTopMargin |
-		UIViewAutoresizingFlexibleBottomMargin;
+		UIViewAutoresizingFlexibleBottomMargin;*/
 	
 	[loadingView addSubview:loadingLabel];
 	UIActivityIndicatorView *activityIndicatorView =
@@ -155,7 +155,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 //
 - (void)removeView
 {
-	UIView *aSuperview = [self superview];
+	//UIView *aSuperview = [self superview];
 	[super removeFromSuperview];
 }
 

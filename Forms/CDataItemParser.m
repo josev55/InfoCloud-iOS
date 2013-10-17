@@ -13,7 +13,7 @@
 @synthesize data,parser,related,prop,chars,tmpDict;
 
 -(id)initWithFilePath:(NSString *)filePath{
-	if ([super init] != nil) {
+	if ((self = [super init]) != nil) {
 		parser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:filePath]];
 		parser.delegate = self;
 		data = [[NSMutableArray alloc] init];

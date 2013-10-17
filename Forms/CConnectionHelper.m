@@ -10,8 +10,8 @@
 
 @implementation CConnectionHelper
 
-static NSString *formsURL = @"http://192.168.4.176/forms/myforms.xml";
-static NSString *formsRepo = @"http://192.168.4.176/forms/repo";
+static NSString *formsURL = @"http://formulariosweb.colabra.cl/myforms.xml";
+static NSString *formsRepo = @"http://formulariosweb.colabra.cl/repo";
 
 + (NSString*)getFormsURL{
 	return formsURL;

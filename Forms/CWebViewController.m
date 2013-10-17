@@ -113,9 +113,9 @@
 
 -(void) enviar{
 	[self setIsSendiongData:YES];
-
-	[[[UIAlertView alloc] initWithTitle:@"Prueba de boton" message:isSendingData ? @"YES" : @"NO" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
 	[webView stringByEvaluatingJavaScriptFromString:@"save()"];
+	[[[UIAlertView alloc] initWithTitle:@"Envio" message:@"Datos enviados a Bandeja de Salida" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+	
 }
 
 //UIWebViewDelegate Implementation
@@ -148,12 +148,28 @@
 		[parser parse];
 		CInfoModel *infoModel = [parser infoModel];
 		if (!isSendingData) {
-			[self modifyInfoXML:infoModel];
-			NSString *draftFile = [NSString stringWithFormat:@"%@/forms/draft_%@_%d.xml",app.documentPath,tmpPath,infoModel.lastCopy.integerValue];
-			[localData writeToFile:draftFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mensaje" message:@"Datos Guardados" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			alert.delegate = self;
-			[alert show];
+			if (isDraft) {
+				NSString *draftFile = [NSString stringWithFormat:@"%@/forms/%@.xml",app.documentPath,draftFilename];
+				if ([[NSFileManager defaultManager] fileExistsAtPath:draftFile]) {
+					NSError *error;
+					[[NSFileManager defaultManager] removeItemAtPath:draftFile error:&error];
+					if (error) {
+						NSLog(@"Error al guardar datos: %@",[error localizedDescription]);
+					}
+					[[NSFileManager defaultManager] createFileAtPath:draftFile contents:nil attributes:nil];
+				}
+				[localData writeToFile:draftFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mensaje" message:@"Datos Guardados" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+				alert.delegate = self;
+				[alert show];
+			} else {
+				[self modifyInfoXML:infoModel];
+				NSString *draftFile = [NSString stringWithFormat:@"%@/forms/draft_%@_%d.xml",app.documentPath,tmpPath,infoModel.lastCopy.integerValue];
+				[localData writeToFile:draftFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mensaje" message:@"Datos Guardados" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+				alert.delegate = self;
+				[alert show];
+			}
 		} else {
 			NSMutableDictionary *plistDict = [NSMutableDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/forms/outbox.plist",app.documentPath]];
 			[plistDict setValue:[NSString stringWithFormat:@"%@/forms/%@.xml",app.documentPath,draftFilename] forKey:[draftFilename stringByReplacingOccurrencesOfString:@"draft_" withString:@""]];
@@ -220,8 +236,7 @@
 	}
 }
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
-	[[self navigationController] popViewControllerAnimated:YES];
-
+	[[self navigationController] popToRootViewControllerAnimated:YES];
 }
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
 	[self setIphone];
@@ -236,9 +251,9 @@
 }
 
 -(void) sendData{
-	NSString *test = @"asdfghjklqwertyuio";
-	NSData *data = [test dataUsingEncoding:NSUTF8StringEncoding];
-	NSString *encoded = [data base64EncodedString];
+	//NSString *test = @"asdfghjklqwertyuio";
+	//NSData *data = [test dataUsingEncoding:NSUTF8StringEncoding];
+	//NSString *encoded = [data base64EncodedString];
 }
 
 

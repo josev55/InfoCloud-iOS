@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COutboxViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface COutboxViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *mOutboxArray;
 @property (nonatomic, strong) NSXMLParser *parser;
